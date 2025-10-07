@@ -34,6 +34,7 @@ export const VehicleTable: React.FC<VehicleTableProps> = ({
             <TableHead>Year</TableHead>
             <TableHead>License Plate</TableHead>
             <TableHead>VIN</TableHead>
+            <TableHead>Mileage</TableHead> {/* New column for Mileage */}
             <TableHead>Status</TableHead>
             <TableHead className="text-right">Actions</TableHead>
           </TableRow>
@@ -41,7 +42,7 @@ export const VehicleTable: React.FC<VehicleTableProps> = ({
         <TableBody>
           {vehicles.length === 0 ? (
             <TableRow>
-              <TableCell colSpan={7} className="h-24 text-center">
+              <TableCell colSpan={8} className="h-24 text-center"> {/* Updated colspan */}
                 No vehicles found.
               </TableCell>
             </TableRow>
@@ -53,6 +54,7 @@ export const VehicleTable: React.FC<VehicleTableProps> = ({
                 <TableCell>{vehicle.year}</TableCell>
                 <TableCell>{vehicle.licensePlate}</TableCell>
                 <TableCell>{vehicle.vin}</TableCell>
+                <TableCell>{vehicle.mileage.toLocaleString()} miles</TableCell> {/* Display mileage */}
                 <TableCell>
                   <span
                     className={`px-2 py-1 rounded-full text-xs font-semibold ${

@@ -6,4 +6,5 @@ export interface Vehicle {
   licensePlate: string;
   vin: string;
   status: "active" | "inactive" | "maintenance";
+  mileage: number; // Added mileage field
 }

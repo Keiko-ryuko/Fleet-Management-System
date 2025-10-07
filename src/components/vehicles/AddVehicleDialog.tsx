@@ -41,6 +41,7 @@ export const AddVehicleDialog: React.FC<AddVehicleDialogProps> = ({
   const [licensePlate, setLicensePlate] = useState("");
   const [vin, setVin] = useState("");
   const [status, setStatus] = useState<Vehicle["status"]>("active");
+  const [mileage, setMileage] = useState(""); // New state for mileage
 
   useEffect(() => {
     if (editingVehicle) {
@@ -50,6 +51,7 @@ export const AddVehicleDialog: React.FC<AddVehicleDialogProps> = ({
       setLicensePlate(editingVehicle.licensePlate);
       setVin(editingVehicle.vin);
       setStatus(editingVehicle.status);
+      setMileage(editingVehicle.mileage.toString()); // Set mileage for editing
     } else {
       setMake("");
       setModel("");
@@ -57,13 +59,14 @@ export const AddVehicleDialog: React.FC<AddVehicleDialogProps> = ({
       setLicensePlate("");
       setVin("");
       setStatus("active");
+      setMileage(""); // Clear mileage for new vehicle
     }
   }, [editingVehicle, isOpen]);
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
 
-    if (!make || !model || !year || !licensePlate || !vin) {
+    if (!make || !model || !year || !licensePlate || !vin || !mileage) {
       toast.error("Please fill in all required fields.");
       return;
     }
@@ -75,6 +78,7 @@ export const AddVehicleDialog: React.FC<AddVehicleDialogProps> = ({
       licensePlate,
       vin,
       status,
+      mileage: parseInt(mileage), // Parse mileage
     };
     onSave(newVehicle);
     onClose();
@@ -147,6 +151,19 @@ export const AddVehicleDialog: React.FC<AddVehicleDialogProps> = ({
               id="vin"
               value={vin}
               onChange={(e) => setVin(e.target.value)}
+              className="col-span-3"
+              required
+            />
+          </div>
+          <div className="grid grid-cols-4 items-center gap-4">
+            <Label htmlFor="mileage" className="text-right">
+              Mileage
+            </Label>
+            <Input
+              id="mileage"
+              type="number"
+              value={mileage}
+              onChange={(e) => setMileage(e.target.value)}
               className="col-span-3"
               required
             />
