@@ -7,7 +7,8 @@ import Index from "./pages/Index";
 import NotFound from "./pages/NotFound";
 import { Layout } from "./components/layout/Layout";
 import StudentDashboard from "./pages/StudentDashboard";
-import LearningModules from "./pages/LearningModules"; // Import the new LearningModules page
+import LearningModules from "./pages/LearningModules";
+import AITutor from "./pages/AITutor"; // Import the new AITutor page
 
 const queryClient = new QueryClient();
 
@@ -21,7 +22,8 @@ const App = () => (
           <Route path="/" element={<Layout />}>
             <Route index element={<Index />} />
             <Route path="student-dashboard" element={<StudentDashboard />} />
-            <Route path="learning-modules" element={<LearningModules />} /> {/* New route */}
+            <Route path="learning-modules" element={<LearningModules />} />
+            <Route path="ai-tutor" element={<AITutor />} /> {/* New route for AI Tutor */}
             {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
             <Route path="*" element={<NotFound />} />
           </Route>
