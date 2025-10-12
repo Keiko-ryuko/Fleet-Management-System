@@ -3,11 +3,10 @@
 import React from "react";
 import { NavLink } from "react-router-dom";
 import {
-  Car,
-  Users,
-  Gauge,
-  Wrench,
-  ScrollText,
+  LayoutDashboard, // Changed from Gauge for general dashboard
+  BookOpen, // For learning modules
+  Bot, // For AI Tutor
+  User, // For profile
   Menu,
 } from "lucide-react";
 import { Button } from "@/components/ui/button";
@@ -22,16 +21,15 @@ interface NavItem {
 }
 
 const navItems: NavItem[] = [
-  { href: "/dashboard", label: "Dashboard", icon: Gauge },
-  { href: "/vehicles", label: "Vehicles", icon: Car },
-  { href: "/drivers", label: "Drivers", icon: Users },
-  { href: "/maintenance", label: "Maintenance", icon: Wrench },
-  { href: "/reports", label: "Reports", icon: ScrollText },
+  { href: "/student-dashboard", label: "Dashboard", icon: LayoutDashboard },
+  { href: "/learning-modules", label: "Learning Modules", icon: BookOpen },
+  { href: "/ai-tutor", label: "AI Tutor", icon: Bot },
+  { href: "/profile", label: "Profile", icon: User },
 ];
 
 const SidebarContent = () => (
   <nav className="flex flex-col gap-2 p-4">
-    <h2 className="text-lg font-semibold mb-4 text-sidebar-primary-foreground">Fleet Manager</h2>
+    <h2 className="text-lg font-semibold mb-4 text-sidebar-primary-foreground">AI Learning App</h2>
     {navItems.map((item) => (
       <NavLink
         key={item.href}
