@@ -7,8 +7,9 @@ import {
   BookOpen,
   Bot,
   User,
-  Settings as SettingsIcon, // Renamed to avoid conflict with page component
+  Settings as SettingsIcon,
   Menu,
+  ClipboardList, // New icon for Quizzes
 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet";
@@ -24,9 +25,10 @@ interface NavItem {
 const navItems: NavItem[] = [
   { href: "/student-dashboard", label: "Dashboard", icon: LayoutDashboard },
   { href: "/learning-modules", label: "Learning Modules", icon: BookOpen },
+  { href: "/quizzes", label: "Quizzes", icon: ClipboardList }, // New nav item for Quizzes
   { href: "/ai-tutor", label: "AI Tutor", icon: Bot },
   { href: "/profile", label: "Profile", icon: User },
-  { href: "/settings", label: "Settings", icon: SettingsIcon }, // New nav item for Settings
+  { href: "/settings", label: "Settings", icon: SettingsIcon },
 ];
 
 const SidebarContent = () => (
