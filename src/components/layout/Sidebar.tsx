@@ -3,10 +3,11 @@
 import React from "react";
 import { NavLink } from "react-router-dom";
 import {
-  LayoutDashboard, // Changed from Gauge for general dashboard
-  BookOpen, // For learning modules
-  Bot, // For AI Tutor
-  User, // For profile
+  LayoutDashboard,
+  BookOpen,
+  Bot,
+  User,
+  Settings as SettingsIcon, // Renamed to avoid conflict with page component
   Menu,
 } from "lucide-react";
 import { Button } from "@/components/ui/button";
@@ -25,6 +26,7 @@ const navItems: NavItem[] = [
   { href: "/learning-modules", label: "Learning Modules", icon: BookOpen },
   { href: "/ai-tutor", label: "AI Tutor", icon: Bot },
   { href: "/profile", label: "Profile", icon: User },
+  { href: "/settings", label: "Settings", icon: SettingsIcon }, // New nav item for Settings
 ];
 
 const SidebarContent = () => (
