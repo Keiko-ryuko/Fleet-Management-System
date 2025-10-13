@@ -1,28 +1,28 @@
 "use client";
 
-import React, { useState } from "react";
-import { Quiz } from "@/types/quiz";
+import React from "react";
 import { QuizCard } from "@/components/quizzes/QuizCard";
-import { toast } from "sonner";
+import { useStudent } from "@/context/StudentContext"; // Import useStudent hook
+import { Quiz } from "@/types/quiz"; // Import Quiz type
 
 const Quizzes = () => {
-  const [quizzes, setQuizzes] = useState<Quiz[]>([]); // Changed to empty array
+  const { quizzes, startQuiz, completeQuiz } = useStudent(); // Use quizzes and actions from context
 
   const handleStartQuiz = (quizToStart: Quiz) => {
-    setQuizzes((prev) =>
-      prev.map((q) =>
-        q.id === quizToStart.id ? { ...q, status: "in-progress" } : q
-      )
-    );
-    toast.info(`Starting quiz: ${quizToStart.title}`);
+    startQuiz(quizToStart.id); // Use context function
     // In a real app, this would navigate to a quiz-taking interface
     console.log("Start quiz:", quizToStart);
+    // For demonstration, let's simulate completion after a delay
+    setTimeout(() => {
+      const score = Math.floor(Math.random() * 101); // Random score between 0 and 100
+      completeQuiz(quizToStart.id, score);
+    }, 5000); // Simulate quiz taking for 5 seconds
   };
 
   const handleViewResults = (quizToView: Quiz) => {
-    toast.info(`Viewing results for: ${quizToView.title}`);
     // In a real app, this would navigate to a results display page
     console.log("View results:", quizToView);
+    // toast.info(`Viewing results for: ${quizToView.title}`); // Removed as per previous instruction to avoid redundant toasts
   };
 
   return (

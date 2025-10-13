@@ -1,36 +1,22 @@
 "use client";
 
-import React, { useState } from "react";
-import { LearningModule } from "@/types/learning-module";
+import React from "react";
 import { ModuleCard } from "@/components/learning-modules/ModuleCard";
-import { toast } from "sonner";
+import { useStudent } from "@/context/StudentContext"; // Import useStudent hook
+import { LearningModule } from "@/types/learning-module"; // Import LearningModule type
 
 const LearningModules = () => {
-  const [modules, setModules] = useState<LearningModule[]>([]); // Changed to empty array
+  const { modules, downloadModule } = useStudent(); // Use modules and downloadModule from context
 
   const handleViewModule = (module: LearningModule) => {
-    toast.info(`Viewing module: ${module.title}`);
     // In a real app, this would navigate to a module viewer page
     console.log("View module:", module);
+    // For now, just a toast
+    // toast.info(`Viewing module: ${module.title}`); // Removed as per previous instruction to avoid redundant toasts
   };
 
   const handleDownloadModule = (moduleToDownload: LearningModule) => {
-    setModules((prev) =>
-      prev.map((m) =>
-        m.id === moduleToDownload.id ? { ...m, status: "updating" } : m
-      )
-    );
-    toast.loading(`Downloading "${moduleToDownload.title}"...`, { id: moduleToDownload.id });
-
-    // Simulate download time
-    setTimeout(() => {
-      setModules((prev) =>
-        prev.map((m) =>
-          m.id === moduleToDownload.id ? { ...m, status: "downloaded" } : m
-        )
-      );
-      toast.success(`"${moduleToDownload.title}" downloaded!`, { id: moduleToDownload.id });
-    }, 3000); // 3 second simulated download
+    downloadModule(moduleToDownload.id); // Use context function
   };
 
   return (

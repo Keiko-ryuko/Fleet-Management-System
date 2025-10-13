@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Label } from "@/components/ui/label";
 import {
@@ -12,23 +12,20 @@ import {
 } from "@/components/ui/select";
 import { Button } from "@/components/ui/button";
 import { toast } from "sonner";
+import { useStudent } from "@/context/StudentContext"; // Import useStudent hook
 import { Student } from "@/types/student"; // Assuming Student type is available
 
 const Settings = () => {
-  // Dummy student data for demonstration
-  const [student, setStudent] = useState<Student>({
-    id: "",
-    name: "Guest Student",
-    grade: 0,
-    language: "English", // Default language
-    progress: [],
-    recommendations: [],
-  });
-
+  const { student, updateStudent } = useStudent(); // Use student data and update function from context
   const [preferredLanguage, setPreferredLanguage] = useState<Student["language"]>(student.language);
 
+  useEffect(() => {
+    // Update local state if student language changes from context (e.g., initial load)
+    setPreferredLanguage(student.language);
+  }, [student.language]);
+
   const handleSaveSettings = () => {
-    setStudent((prev) => ({ ...prev, language: preferredLanguage }));
+    updateStudent({ language: preferredLanguage }); // Use context function to update
     toast.success("Settings saved successfully!");
     console.log("Updated student language:", preferredLanguage);
   };

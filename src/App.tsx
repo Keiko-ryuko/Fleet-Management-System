@@ -10,8 +10,9 @@ import StudentDashboard from "./pages/StudentDashboard";
 import LearningModules from "./pages/LearningModules";
 import AITutor from "./pages/AITutor";
 import Profile from "./pages/Profile";
-import Settings from "./pages/Settings"; // Import the new Settings page
+import Settings from "./pages/Settings";
 import Quizzes from "./pages/Quizzes";
+import { StudentProvider } from "./context/StudentContext"; // Import StudentProvider
 
 const queryClient = new QueryClient();
 
@@ -21,19 +22,21 @@ const App = () => (
       <Toaster />
       <Sonner />
       <BrowserRouter>
-        <Routes>
-          <Route path="/" element={<Layout />}>
-            <Route index element={<Index />} />
-            <Route path="student-dashboard" element={<StudentDashboard />} />
-            <Route path="learning-modules" element={<LearningModules />} />
-            <Route path="quizzes" element={<Quizzes />} />
-            <Route path="ai-tutor" element={<AITutor />} />
-            <Route path="profile" element={<Profile />} />
-            <Route path="settings" element={<Settings />} /> {/* New route for Settings */}
-            {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
-            <Route path="*" element={<NotFound />} />
-          </Route>
-        </Routes>
+        <StudentProvider> {/* Wrap the entire application with StudentProvider */}
+          <Routes>
+            <Route path="/" element={<Layout />}>
+              <Route index element={<Index />} />
+              <Route path="student-dashboard" element={<StudentDashboard />} />
+              <Route path="learning-modules" element={<LearningModules />} />
+              <Route path="quizzes" element={<Quizzes />} />
+              <Route path="ai-tutor" element={<AITutor />} />
+              <Route path="profile" element={<Profile />} />
+              <Route path="settings" element={<Settings />} />
+              {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
+              <Route path="*" element={<NotFound />} />
+            </Route>
+          </Routes>
+        </StudentProvider>
       </BrowserRouter>
     </TooltipProvider>
   </QueryClientProvider>

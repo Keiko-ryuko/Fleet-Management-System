@@ -1,21 +1,13 @@
 "use client";
 
-import React, { useState } from "react";
+import React from "react";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Label } from "@/components/ui/label";
 import { Input } from "@/components/ui/input";
-import { Student } from "@/types/student";
+import { useStudent } from "@/context/StudentContext"; // Import useStudent hook
 
 const Profile = () => {
-  // Dummy student data (can be fetched from state or API in a real app)
-  const [student] = useState<Student>({
-    id: "",
-    name: "Guest Student",
-    grade: 0,
-    language: "English",
-    progress: [],
-    recommendations: [],
-  });
+  const { student } = useStudent(); // Use student data from context
 
   return (
     <div className="p-4">
