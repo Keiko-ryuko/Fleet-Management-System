@@ -6,59 +6,7 @@ import { QuizCard } from "@/components/quizzes/QuizCard";
 import { toast } from "sonner";
 
 const Quizzes = () => {
-  const [quizzes, setQuizzes] = useState<Quiz[]>([
-    {
-      id: "QZ001",
-      title: "Algebra Basics Quiz",
-      subject: "Mathematics",
-      form: 1,
-      description: "Test your understanding of fundamental algebraic concepts.",
-      questionCount: 10,
-      status: "available",
-      language: "English",
-    },
-    {
-      id: "QZ002",
-      title: "Photosynthesis Assessment",
-      subject: "Science",
-      form: 2,
-      description: "A short quiz on the process of photosynthesis.",
-      questionCount: 8,
-      status: "completed",
-      score: 85,
-      language: "English",
-    },
-    {
-      id: "QZ003",
-      title: "Shona Vocabulary Test",
-      subject: "Shona",
-      form: 1,
-      description: "Assess your knowledge of basic Shona vocabulary.",
-      questionCount: 15,
-      status: "available",
-      language: "Shona",
-    },
-    {
-      id: "QZ004",
-      title: "Ndebele Proverbs Quiz",
-      subject: "Ndebele",
-      form: 3,
-      description: "Challenge yourself with common Ndebele proverbs and their meanings.",
-      questionCount: 7,
-      status: "in-progress",
-      language: "Ndebele",
-    },
-    {
-      id: "QZ005",
-      title: "Chemical Bonding Quiz",
-      subject: "Science",
-      form: 4,
-      description: "Advanced quiz on different types of chemical bonds.",
-      questionCount: 12,
-      status: "available",
-      language: "English",
-    },
-  ]);
+  const [quizzes, setQuizzes] = useState<Quiz[]>([]); // Changed to empty array
 
   const handleStartQuiz = (quizToStart: Quiz) => {
     setQuizzes((prev) =>
@@ -93,6 +41,11 @@ const Quizzes = () => {
             onViewResults={handleViewResults}
           />
         ))}
+        {quizzes.length === 0 && (
+          <div className="col-span-full text-center text-muted-foreground py-8">
+            No quizzes available.
+          </div>
+        )}
       </div>
     </div>
   );

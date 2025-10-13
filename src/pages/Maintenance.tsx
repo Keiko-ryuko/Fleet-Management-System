@@ -9,11 +9,7 @@ import { MaintenanceRecord } from "@/types/maintenance";
 import { toast } from "sonner";
 
 const Maintenance = () => {
-  const [maintenanceRecords, setMaintenanceRecords] = useState<MaintenanceRecord[]>([
-    { id: "M001", vehicleId: "1", description: "Oil Change", date: "2024-10-01", cost: 75.00, status: "scheduled" },
-    { id: "M002", vehicleId: "2", description: "Tire Rotation", date: "2024-09-15", cost: 50.00, status: "completed" },
-    { id: "M003", vehicleId: "3", description: "Brake Inspection", date: "2024-08-20", cost: 0.00, status: "overdue" },
-  ]);
+  const [maintenanceRecords, setMaintenanceRecords] = useState<MaintenanceRecord[]>([]); // Changed to empty array
   const [isDialogOpen, setIsDialogOpen] = useState(false);
   const [editingRecord, setEditingRecord] = useState<MaintenanceRecord | null>(null);
 

@@ -6,68 +6,7 @@ import { ModuleCard } from "@/components/learning-modules/ModuleCard";
 import { toast } from "sonner";
 
 const LearningModules = () => {
-  const [modules, setModules] = useState<LearningModule[]>([
-    {
-      id: "LM001",
-      title: "Algebra Fundamentals",
-      subject: "Mathematics",
-      form: 1,
-      description: "An introductory module covering basic algebraic expressions, equations, and inequalities.",
-      contentUrl: "/content/math/algebra-fundamentals.pdf",
-      status: "downloaded",
-      language: "English",
-    },
-    {
-      id: "LM002",
-      title: "Photosynthesis in Plants",
-      subject: "Science",
-      form: 2,
-      description: "Explore how plants convert light energy into chemical energy through photosynthesis.",
-      contentUrl: "/content/science/photosynthesis.html",
-      status: "available",
-      language: "English",
-    },
-    {
-      id: "LM003",
-      title: "Shona Grammar Basics",
-      subject: "Shona",
-      form: 1,
-      description: "Learn the foundational grammar rules and sentence structures in Shona.",
-      contentUrl: "/content/shona/grammar-basics.pdf",
-      status: "available",
-      language: "Shona",
-    },
-    {
-      id: "LM004",
-      title: "Ndebele Culture & History",
-      subject: "Ndebele",
-      form: 3,
-      description: "A deep dive into the rich cultural heritage and history of the Ndebele people.",
-      contentUrl: "/content/ndebele/culture-history.mp4",
-      status: "available",
-      language: "Ndebele",
-    },
-    {
-      id: "LM005",
-      title: "Chemical Reactions",
-      subject: "Science",
-      form: 4,
-      description: "Understanding different types of chemical reactions and balancing equations.",
-      contentUrl: "/content/science/chemical-reactions.pdf",
-      status: "downloaded",
-      language: "English",
-    },
-    {
-      id: "LM006",
-      title: "Geometry and Shapes",
-      subject: "Mathematics",
-      form: 2,
-      description: "An interactive module on geometric shapes, angles, and measurements.",
-      contentUrl: "/content/math/geometry.html",
-      status: "available",
-      language: "English",
-    },
-  ]);
+  const [modules, setModules] = useState<LearningModule[]>([]); // Changed to empty array
 
   const handleViewModule = (module: LearningModule) => {
     toast.info(`Viewing module: ${module.title}`);
@@ -110,6 +49,11 @@ const LearningModules = () => {
             onDownload={handleDownloadModule}
           />
         ))}
+        {modules.length === 0 && (
+          <div className="col-span-full text-center text-muted-foreground py-8">
+            No learning modules available.
+          </div>
+        )}
       </div>
     </div>
   );

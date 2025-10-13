@@ -9,11 +9,7 @@ import { Driver } from "@/types/driver";
 import { toast } from "sonner";
 
 const Drivers = () => {
-  const [drivers, setDrivers] = useState<Driver[]>([
-    { id: "D001", name: "John Doe", licenseNumber: "DL12345", contactNumber: "555-1111", email: "john.doe@example.com", status: "active" },
-    { id: "D002", name: "Jane Smith", licenseNumber: "DL67890", contactNumber: "555-2222", email: "jane.smith@example.com", status: "on-leave" },
-    { id: "D003", name: "Peter Jones", licenseNumber: "DL11223", contactNumber: "555-3333", email: "peter.jones@example.com", status: "active" },
-  ]);
+  const [drivers, setDrivers] = useState<Driver[]>([]); // Changed to empty array
   const [isDialogOpen, setIsDialogOpen] = useState(false);
   const [editingDriver, setEditingDriver] = useState<Driver | null>(null);
 

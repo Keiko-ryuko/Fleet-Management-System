@@ -9,12 +9,12 @@ import { Student } from "@/types/student";
 const Profile = () => {
   // Dummy student data (can be fetched from state or API in a real app)
   const [student] = useState<Student>({
-    id: "S001",
-    name: "Tendai Moyo",
-    grade: 3, // Corresponds to Form 3
-    language: "Shona",
-    progress: [], // Not displayed on profile, but part of the type
-    recommendations: [], // Not displayed on profile, but part of the type
+    id: "",
+    name: "Guest Student",
+    grade: 0,
+    language: "English",
+    progress: [],
+    recommendations: [],
   });
 
   return (
@@ -39,7 +39,7 @@ const Profile = () => {
             <Label htmlFor="grade" className="text-right">
               Grade (Form)
             </Label>
-            <Input id="grade" value={`Form ${student.grade}`} readOnly className="col-span-3" />
+            <Input id="grade" value={student.grade ? `Form ${student.grade}` : "N/A"} readOnly className="col-span-3" />
           </div>
           <div className="grid grid-cols-4 items-center gap-4">
             <Label htmlFor="language" className="text-right">

@@ -5,24 +5,16 @@ import { Button } from "@/components/ui/button";
 import { PlusCircle } from "lucide-react";
 import { VehicleTable } from "@/components/vehicles/VehicleTable";
 import { AddVehicleDialog } from "@/components/vehicles/AddVehicleDialog";
-import { AssignDriverDialog } from "@/components/vehicles/AssignDriverDialog"; // Import new dialog
+import { AssignDriverDialog } from "@/components/vehicles/AssignDriverDialog";
 import { Vehicle } from "@/types/vehicle";
-import { Driver } from "@/types/driver"; // Import Driver type
+import { Driver } from "@/types/driver";
 import { toast } from "sonner";
 
 const Vehicles = () => {
-  const [vehicles, setVehicles] = useState<Vehicle[]>([
-    { id: "1", make: "Ford", model: "F-150", year: 2020, licensePlate: "ABC-123", vin: "VIN1234567890", status: "active", mileage: 50000, assignedDriverId: "D001" },
-    { id: "2", make: "Mercedes-Benz", model: "Sprinter", year: 2018, licensePlate: "DEF-456", vin: "VIN0987654321", status: "maintenance", mileage: 75000, assignedDriverId: null },
-    { id: "3", make: "Tesla", model: "Model 3", year: 2022, licensePlate: "GHI-789", vin: "VIN1122334455", status: "active", mileage: 20000, assignedDriverId: "D003" },
-  ]);
+  const [vehicles, setVehicles] = useState<Vehicle[]>([]); // Changed to empty array
 
   // Dummy drivers data for assignment (in a real app, this would come from a global state or API)
-  const [drivers] = useState<Driver[]>([
-    { id: "D001", name: "John Doe", licenseNumber: "DL12345", contactNumber: "555-1111", email: "john.doe@example.com", status: "active" },
-    { id: "D002", name: "Jane Smith", licenseNumber: "DL67890", contactNumber: "555-2222", email: "jane.smith@example.com", status: "on-leave" },
-    { id: "D003", name: "Peter Jones", licenseNumber: "DL11223", contactNumber: "555-3333", email: "peter.jones@example.com", status: "active" },
-  ]);
+  const [drivers] = useState<Driver[]>([]); // Changed to empty array
 
   const [isAddEditDialogOpen, setIsAddEditDialogOpen] = useState(false);
   const [editingVehicle, setEditingVehicle] = useState<Vehicle | null>(null);
@@ -101,10 +93,10 @@ const Vehicles = () => {
 
       <VehicleTable
         vehicles={vehicles}
-        drivers={drivers} // Pass drivers to the table
+        drivers={drivers}
         onEdit={handleEditVehicle}
         onDelete={handleDeleteVehicle}
-        onAssignDriver={handleAssignDriverClick} // Pass new handler
+        onAssignDriver={handleAssignDriverClick}
       />
 
       <AddVehicleDialog

@@ -17,9 +17,9 @@ import { Student } from "@/types/student"; // Assuming Student type is available
 const Settings = () => {
   // Dummy student data for demonstration
   const [student, setStudent] = useState<Student>({
-    id: "S001",
-    name: "Tendai Moyo",
-    grade: 3,
+    id: "",
+    name: "Guest Student",
+    grade: 0,
     language: "English", // Default language
     progress: [],
     recommendations: [],

@@ -8,20 +8,12 @@ import { Student } from "@/types/student";
 const StudentDashboard = () => {
   // Dummy student data
   const [student] = useState<Student>({
-    id: "S001",
-    name: "Tendai Moyo",
-    grade: 3, // Corresponds to Form 3
-    language: "Shona",
-    progress: [
-      { subject: "Mathematics", currentScore: 750, totalQuizzes: 10, completedModules: 5, totalModules: 8 },
-      { subject: "Science", currentScore: 620, totalQuizzes: 8, completedModules: 4, totalModules: 7 },
-      { subject: "English", currentScore: 800, totalQuizzes: 12, completedModules: 7, totalModules: 10 },
-    ],
-    recommendations: [
-      { id: "rec001", title: "Review Algebra Basics", description: "You struggled with the last algebra quiz. Review Module 3.", link: "/learning-modules/math/algebra-basics", type: "module", priority: "high" },
-      { id: "rec002", title: "Practice Photosynthesis Quiz", description: "Strengthen your understanding of plant biology.", link: "/learning-modules/science/photosynthesis-quiz", type: "quiz", priority: "medium" },
-      { id: "rec003", title: "Explore New Vocabulary", description: "Expand your English vocabulary with new words.", link: "/learning-modules/english/vocabulary-builder", type: "resource", priority: "low" },
-    ],
+    id: "",
+    name: "Guest Student",
+    grade: 0,
+    language: "English",
+    progress: [], // Changed to empty array
+    recommendations: [], // Changed to empty array
   });
 
   return (
@@ -38,6 +30,9 @@ const StudentDashboard = () => {
             <ProgressCard key={p.subject} progress={p} />
           ))}
         </div>
+        {student.progress.length === 0 && (
+          <p className="text-center text-muted-foreground py-8">No progress data available. Start exploring modules and quizzes!</p>
+        )}
       </section>
 
       <section>
@@ -47,6 +42,9 @@ const StudentDashboard = () => {
             <RecommendationCard key={rec.id} recommendation={rec} />
           ))}
         </div>
+        {student.recommendations.length === 0 && (
+          <p className="text-center text-muted-foreground py-8">No recommendations at this time. Keep learning to get personalized suggestions!</p>
+        )}
       </section>
     </div>
   );
