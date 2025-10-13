@@ -5,9 +5,9 @@ import { NavLink } from "react-router-dom";
 import {
   LayoutDashboard,
   BookOpen,
-  Bot, // Icon for AI Tutor
+  Bot,
   User,
-  Settings as SettingsIcon,
+  Settings as SettingsIcon, // Icon for Settings
   Menu,
   ClipboardList,
 } from "lucide-react";
@@ -26,9 +26,9 @@ const navItems: NavItem[] = [
   { href: "/student-dashboard", label: "Dashboard", icon: LayoutDashboard },
   { href: "/learning-modules", label: "Learning Modules", icon: BookOpen },
   { href: "/quizzes", label: "Quizzes", icon: ClipboardList },
-  { href: "/ai-tutor", label: "AI Tutor", icon: Bot }, // New nav item for AI Tutor
+  { href: "/ai-tutor", label: "AI Tutor", icon: Bot },
   { href: "/profile", label: "Profile", icon: User },
-  { href: "/settings", label: "Settings", icon: SettingsIcon },
+  { href: "/settings", label: "Settings", icon: SettingsIcon }, // New nav item for Settings
 ];
 
 const SidebarContent = () => (
