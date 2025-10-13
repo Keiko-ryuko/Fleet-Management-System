@@ -8,8 +8,8 @@ import NotFound from "./pages/NotFound";
 import { Layout } from "./components/layout/Layout";
 import StudentDashboard from "./pages/StudentDashboard";
 import LearningModules from "./pages/LearningModules";
-import AITutor from "./pages/AITutor";
-import Profile from "./pages/Profile"; // Import the new Profile page
+import AITutor from "./pages/AITutor"; // Import the new AI Tutor page
+import Profile from "./pages/Profile";
 import Settings from "./pages/Settings";
 import Quizzes from "./pages/Quizzes";
 
@@ -27,8 +27,8 @@ const App = () => (
             <Route path="student-dashboard" element={<StudentDashboard />} />
             <Route path="learning-modules" element={<LearningModules />} />
             <Route path="quizzes" element={<Quizzes />} />
-            <Route path="ai-tutor" element={<AITutor />} />
-            <Route path="profile" element={<Profile />} /> {/* New route for Profile */}
+            <Route path="ai-tutor" element={<AITutor />} /> {/* New route for AI Tutor */}
+            <Route path="profile" element={<Profile />} />
             <Route path="settings" element={<Settings />} />
             {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
             <Route path="*" element={<NotFound />} />

@@ -5,8 +5,8 @@ import { NavLink } from "react-router-dom";
 import {
   LayoutDashboard,
   BookOpen,
-  Bot,
-  User, // Icon for Profile
+  Bot, // Icon for AI Tutor
+  User,
   Settings as SettingsIcon,
   Menu,
   ClipboardList,
@@ -26,8 +26,8 @@ const navItems: NavItem[] = [
   { href: "/student-dashboard", label: "Dashboard", icon: LayoutDashboard },
   { href: "/learning-modules", label: "Learning Modules", icon: BookOpen },
   { href: "/quizzes", label: "Quizzes", icon: ClipboardList },
-  { href: "/ai-tutor", label: "AI Tutor", icon: Bot },
-  { href: "/profile", label: "Profile", icon: User }, // New nav item for Profile
+  { href: "/ai-tutor", label: "AI Tutor", icon: Bot }, // New nav item for AI Tutor
+  { href: "/profile", label: "Profile", icon: User },
   { href: "/settings", label: "Settings", icon: SettingsIcon },
 ];
 

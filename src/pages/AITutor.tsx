@@ -7,6 +7,7 @@ import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { ScrollArea } from "@/components/ui/scroll-area";
 import { Send, Bot, User } from "lucide-react";
 import { toast } from "sonner";
+import { cn } from "@/lib/utils"; // Import cn for conditional class names
 
 interface Message {
   id: string;
