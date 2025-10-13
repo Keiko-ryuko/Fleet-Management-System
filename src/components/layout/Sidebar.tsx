@@ -6,10 +6,10 @@ import {
   LayoutDashboard,
   BookOpen,
   Bot,
-  User,
+  User, // Icon for Profile
   Settings as SettingsIcon,
   Menu,
-  ClipboardList, // New icon for Quizzes
+  ClipboardList,
 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet";
@@ -25,9 +25,9 @@ interface NavItem {
 const navItems: NavItem[] = [
   { href: "/student-dashboard", label: "Dashboard", icon: LayoutDashboard },
   { href: "/learning-modules", label: "Learning Modules", icon: BookOpen },
-  { href: "/quizzes", label: "Quizzes", icon: ClipboardList }, // New nav item for Quizzes
+  { href: "/quizzes", label: "Quizzes", icon: ClipboardList },
   { href: "/ai-tutor", label: "AI Tutor", icon: Bot },
-  { href: "/profile", label: "Profile", icon: User },
+  { href: "/profile", label: "Profile", icon: User }, // New nav item for Profile
   { href: "/settings", label: "Settings", icon: SettingsIcon },
 ];
 

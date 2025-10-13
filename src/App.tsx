@@ -9,9 +9,9 @@ import { Layout } from "./components/layout/Layout";
 import StudentDashboard from "./pages/StudentDashboard";
 import LearningModules from "./pages/LearningModules";
 import AITutor from "./pages/AITutor";
-import Profile from "./pages/Profile";
+import Profile from "./pages/Profile"; // Import the new Profile page
 import Settings from "./pages/Settings";
-import Quizzes from "./pages/Quizzes"; // Import the new Quizzes page
+import Quizzes from "./pages/Quizzes";
 
 const queryClient = new QueryClient();
 
@@ -26,9 +26,9 @@ const App = () => (
             <Route index element={<Index />} />
             <Route path="student-dashboard" element={<StudentDashboard />} />
             <Route path="learning-modules" element={<LearningModules />} />
-            <Route path="quizzes" element={<Quizzes />} /> {/* New route for Quizzes */}
+            <Route path="quizzes" element={<Quizzes />} />
             <Route path="ai-tutor" element={<AITutor />} />
-            <Route path="profile" element={<Profile />} />
+            <Route path="profile" element={<Profile />} /> {/* New route for Profile */}
             <Route path="settings" element={<Settings />} />
             {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
             <Route path="*" element={<NotFound />} />
