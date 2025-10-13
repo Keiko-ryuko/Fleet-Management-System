@@ -6,6 +6,7 @@ import React, {
   useContext,
   ReactNode,
   useCallback,
+  useEffect, // Import useEffect
 } from "react";
 import { Student, StudentProgress, StudyRecommendation } from "@/types/student";
 import { LearningModule } from "@/types/learning-module";
@@ -37,120 +38,165 @@ interface StudentProviderProps {
   children: ReactNode;
 }
 
+// Initial dummy data (will be loaded from localStorage if available)
+const initialStudent: Student = {
+  id: "S001",
+  name: "Guest Student",
+  grade: 3,
+  language: "English",
+  progress: [
+    {
+      subject: "Mathematics",
+      currentScore: 750,
+      totalQuizzes: 10,
+      completedModules: 5,
+      totalModules: 8,
+    },
+    {
+      subject: "Science",
+      currentScore: 600,
+      totalQuizzes: 8,
+      completedModules: 4,
+      totalModules: 7,
+    },
+  ],
+  recommendations: [
+    {
+      id: "rec1",
+      title: "Algebra Basics Module",
+      description: "Review fundamental algebraic concepts.",
+      link: "/learning-modules",
+      type: "module",
+      priority: "high",
+    },
+    {
+      id: "rec2",
+      title: "Photosynthesis Quiz",
+      description: "Test your knowledge on plant biology.",
+      link: "/quizzes",
+      type: "quiz",
+      priority: "medium",
+    },
+  ],
+};
+
+const initialModules: LearningModule[] = [
+  {
+    id: "mod1",
+    title: "Introduction to Algebra",
+    subject: "Mathematics",
+    form: 3,
+    description:
+      "This module covers the basic principles of algebra, including variables, expressions, and simple equations.",
+    contentUrl: "/content/algebra-intro.pdf",
+    status: "available",
+    language: "English",
+  },
+  {
+    id: "mod2",
+    title: "The Water Cycle",
+    subject: "Science",
+    form: 2,
+    description:
+      "Learn about the continuous movement of water on, above, and below the surface of the Earth.",
+    contentUrl: "/content/water-cycle.pdf",
+    status: "downloaded",
+    language: "English",
+  },
+  {
+    id: "mod3",
+    title: "Shona Greetings",
+    subject: "Shona",
+    form: 1,
+    description:
+      "A beginner's guide to common greetings and phrases in Shona.",
+    contentUrl: "/content/shona-greetings.pdf",
+    status: "available",
+    language: "Shona",
+  },
+];
+
+const initialQuizzes: Quiz[] = [
+  {
+    id: "quiz1",
+    title: "Algebra Fundamentals",
+    subject: "Mathematics",
+    form: 3,
+    description: "A short quiz to test your understanding of basic algebra.",
+    questionCount: 10,
+    status: "available",
+    language: "English",
+  },
+  {
+    id: "quiz2",
+    title: "Biology: Cells",
+    subject: "Science",
+    form: 2,
+    description: "Test your knowledge on the structure and function of cells.",
+    questionCount: 15,
+    status: "completed",
+    score: 85,
+    language: "English",
+  },
+  {
+    id: "quiz3",
+    title: "Ndebele Phrases",
+    subject: "Ndebele",
+    form: 1,
+    description: "Quiz on common Ndebele phrases and their meanings.",
+    questionCount: 8,
+    status: "in-progress",
+    language: "Ndebele",
+  },
+];
+
 // Create the provider component
 export const StudentProvider: React.FC<StudentProviderProps> = ({
   children,
 }) => {
-  const [student, setStudent] = useState<Student>({
-    id: "S001",
-    name: "Guest Student",
-    grade: 3,
-    language: "English",
-    progress: [
-      {
-        subject: "Mathematics",
-        currentScore: 750,
-        totalQuizzes: 10,
-        completedModules: 5,
-        totalModules: 8,
-      },
-      {
-        subject: "Science",
-        currentScore: 600,
-        totalQuizzes: 8,
-        completedModules: 4,
-        totalModules: 7,
-      },
-    ],
-    recommendations: [
-      {
-        id: "rec1",
-        title: "Algebra Basics Module",
-        description: "Review fundamental algebraic concepts.",
-        link: "/learning-modules",
-        type: "module",
-        priority: "high",
-      },
-      {
-        id: "rec2",
-        title: "Photosynthesis Quiz",
-        description: "Test your knowledge on plant biology.",
-        link: "/quizzes",
-        type: "quiz",
-        priority: "medium",
-      },
-    ],
+  // Initialize state from localStorage or use initial dummy data
+  const [student, setStudent] = useState<Student>(() => {
+    if (typeof window !== "undefined") {
+      const savedStudent = localStorage.getItem("student");
+      return savedStudent ? JSON.parse(savedStudent) : initialStudent;
+    }
+    return initialStudent;
   });
 
-  const [modules, setModules] = useState<LearningModule[]>([
-    {
-      id: "mod1",
-      title: "Introduction to Algebra",
-      subject: "Mathematics",
-      form: 3,
-      description:
-        "This module covers the basic principles of algebra, including variables, expressions, and simple equations.",
-      contentUrl: "/content/algebra-intro.pdf",
-      status: "available",
-      language: "English",
-    },
-    {
-      id: "mod2",
-      title: "The Water Cycle",
-      subject: "Science",
-      form: 2,
-      description:
-        "Learn about the continuous movement of water on, above, and below the surface of the Earth.",
-      contentUrl: "/content/water-cycle.pdf",
-      status: "downloaded",
-      language: "English",
-    },
-    {
-      id: "mod3",
-      title: "Shona Greetings",
-      subject: "Shona",
-      form: 1,
-      description:
-        "A beginner's guide to common greetings and phrases in Shona.",
-      contentUrl: "/content/shona-greetings.pdf",
-      status: "available",
-      language: "Shona",
-    },
-  ]);
+  const [modules, setModules] = useState<LearningModule[]>(() => {
+    if (typeof window !== "undefined") {
+      const savedModules = localStorage.getItem("modules");
+      return savedModules ? JSON.parse(savedModules) : initialModules;
+    }
+    return initialModules;
+  });
 
-  const [quizzes, setQuizzes] = useState<Quiz[]>([
-    {
-      id: "quiz1",
-      title: "Algebra Fundamentals",
-      subject: "Mathematics",
-      form: 3,
-      description: "A short quiz to test your understanding of basic algebra.",
-      questionCount: 10,
-      status: "available",
-      language: "English",
-    },
-    {
-      id: "quiz2",
-      title: "Biology: Cells",
-      subject: "Science",
-      form: 2,
-      description: "Test your knowledge on the structure and function of cells.",
-      questionCount: 15,
-      status: "completed",
-      score: 85,
-      language: "English",
-    },
-    {
-      id: "quiz3",
-      title: "Ndebele Phrases",
-      subject: "Ndebele",
-      form: 1,
-      description: "Quiz on common Ndebele phrases and their meanings.",
-      questionCount: 8,
-      status: "in-progress",
-      language: "Ndebele",
-    },
-  ]);
+  const [quizzes, setQuizzes] = useState<Quiz[]>(() => {
+    if (typeof window !== "undefined") {
+      const savedQuizzes = localStorage.getItem("quizzes");
+      return savedQuizzes ? JSON.parse(savedQuizzes) : initialQuizzes;
+    }
+    return initialQuizzes;
+  });
+
+  // Save state to localStorage whenever it changes
+  useEffect(() => {
+    if (typeof window !== "undefined") {
+      localStorage.setItem("student", JSON.stringify(student));
+    }
+  }, [student]);
+
+  useEffect(() => {
+    if (typeof window !== "undefined") {
+      localStorage.setItem("modules", JSON.stringify(modules));
+    }
+  }, [modules]);
+
+  useEffect(() => {
+    if (typeof window !== "undefined") {
+      localStorage.setItem("quizzes", JSON.stringify(quizzes));
+    }
+  }, [quizzes]);
 
   const updateStudent = useCallback((newStudent: Partial<Student>) => {
     setStudent((prev) => ({ ...prev, ...newStudent }));
